@@ -3,7 +3,9 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\SongController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +36,16 @@ Route::get('/about', [AboutController::class, 'index'])
 
 Route::get('/songs', [SongController::class, 'index'])
     ->name('songs.index');
+
+Route::resource('/artists', ArtistController::class);
+
+Route::get('/artists/{artist}/songs', [
+    ArtistController::class , 'createSong'
+])->name('artists.songs.create');
+
+Route::post('/artists/{artist}/songs',[
+    ArtistController::class, 'storeSong'
+])->name('artists.songs.store');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
