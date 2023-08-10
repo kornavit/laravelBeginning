@@ -5,10 +5,12 @@
     <div class="bg-white shadow-md rounded-md overflow-hidden max-w-lg mx-auto mt-16">
         <div class="bg-pink-100 py-2 px-4 flex justify-between">
             <h2 class="text-xl font-semibold text-gray-800">Artist List</h2>
-            <a class="inline-block py-2 px-4 border border-gray-600 bg-pink-300 rounded-md uppercase"
-            href="{{ route('artists.create'); }}">
-                Create New Artist
-            </a>
+            @can('create', App\Models\Artist::class)
+                <a class="inline-block py-2 px-4 border border-gray-600 bg-pink-300 rounded-md uppercase"
+                href="{{ route('artists.create'); }}">
+                    Create New Artist
+                </a>
+            @endcan
         </div>
         <ul class="divide-y divide-gray-200">
             @foreach ($artists as $artist)

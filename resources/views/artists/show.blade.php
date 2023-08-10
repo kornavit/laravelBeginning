@@ -6,32 +6,38 @@
 </h1>
 <br>
 <div class="flex justify-center">
-    <a class="inline-block py-2 px-4 border border-gray-600 bg-pink-300 rounded-md uppercase"
-            href="{{ route('artists.edit', ['artist' => $artist]); }}">
-                Edit Artist
-    </a>
+    @can('update', $artist)
+        <a class="inline-block py-2 px-4 border border-gray-600 bg-pink-300 rounded-md uppercase"
+                href="{{ route('artists.edit', ['artist' => $artist]); }}">
+                    Edit Artist
+        </a>
+    @endcan
 
-    @if($artist->songs->isEmpty())
-    <form class="inline-block"
-    action="{{ route('artists.destroy' , ['artist' => $artist]) }}" method="POST">
-        @csrf
-        @method("DELETE")
+    @can('destroy', $artist)
+        @if($artist->songs->isEmpty())
+            <form class="inline-block"
+            action="{{ route('artists.destroy' , ['artist' => $artist]) }}" method="POST">
+                @csrf
+                @method("DELETE")
 
-        <button type="submit"
-                class="inline-block py-2 px-4 border border-gray-600 bg-pink-300 rounded-md uppercase">
-        Delete Aritst
-        </button>
-    </form>
-    @endif
+                <button type="submit"
+                        class="inline-block py-2 px-4 border border-gray-600 bg-pink-300 rounded-md uppercase">
+                Delete Aritst
+                </button>
+            </form>
+        @endif
+    @endcan
 </div>
 
     <div class="bg-white shadow-md rounded-md overflow-hidden max-w-lg mx-auto mt-16">
         <div class="bg-pink-100 py-2 px-4 flex justify-between">
             <h2 class="text-xl font-semibold text-gray-800">Songs</h2>
-            <a class="inline-block py-2 px-4 border border-gray-600 bg-pink-300 rounded-md uppercase"
-                href="{{ route('artists.songs.create', ['artist' => $artist]); }}">
-                    Add New Song
-            </a>
+            @can('update', $artist)
+                <a class="inline-block py-2 px-4 border border-gray-600 bg-pink-300 rounded-md uppercase"
+                    href="{{ route('artists.songs.create', ['artist' => $artist]); }}">
+                        Add New Song
+                </a>
+            @endcan
         </div>
         <ul class="divide-y divide-gray-200">
             @foreach ($artist->songs as $song)

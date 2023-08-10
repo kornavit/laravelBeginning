@@ -26,7 +26,7 @@ class PlaylistSeeder extends Seeder
 
         $playlist = Playlist::factory()
             ->count(10)
-            ->for($user)->has(Song::factory())
+            ->for($user)->has(Song::factory()->count(10))
             ->create();
     }
 }
