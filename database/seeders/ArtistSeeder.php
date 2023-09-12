@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Artist;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Song;
 use Illuminate\Database\Seeder;
 
 class ArtistSeeder extends Seeder
