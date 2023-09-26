@@ -48,6 +48,7 @@ class ArtistController extends Controller
      */
     public function show(Artist $artist)
     {
+        $songs = $artist->songs;
         return $artist;
     }
 
